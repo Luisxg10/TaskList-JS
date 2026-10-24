@@ -1,0 +1,11 @@
+{
+  "name": "tasklist-js",
+  "version": "1.0.0",
+  "description": "Sistema web sencillo para administrar tareas pendientes.",
+  "main": "app.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": ["javascript", "tareas", "github-actions"],
+  "license": "MIT"
+}
