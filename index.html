@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskList JS | Tareas pendientes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="contenedor">
+    <header>
+      <h1>Mis tareas</h1>
+      <p class="subtitulo">Anota lo que necesitas hacer y lleva el control de tu día.</p>
+    </header>
+
+    <form id="formulario-tarea">
+      <label class="sr-only" for="entrada-tarea">Nueva tarea</label>
+      <input id="entrada-tarea" type="text" placeholder="Escribe una tarea..." maxlength="120" autocomplete="off">
+      <button type="submit">Agregar</button>
+    </form>
+    <p id="mensaje" role="status" aria-live="polite"></p>
+
+    <section class="resumen" aria-label="Resumen de tareas">
+      <span id="contador">0 tareas pendientes</span>
+      <button id="limpiar-completadas" class="boton-secundario" type="button">Borrar Todo</button>
+    </section>
+
+    <ul id="lista-tareas" aria-label="Lista de tareas"></ul>
+    <p id="lista-vacia" class="lista-vacia">Todavía no tienes tareas</p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
