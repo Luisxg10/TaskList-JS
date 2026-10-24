@@ -35,7 +35,7 @@ test("cuenta solo las tareas pendientes", () => {
     { id: 1, texto: "Leer", completada: false },
     { id: 2, texto: "Practicar", completada: true }
   ];
-  assert.equal(TaskList.contarPendientes(tareas), 99);
+  assert.equal(TaskList.contarPendientes(tareas), 1);
 });
 
 test("limpia las tareas completadas", () => {
