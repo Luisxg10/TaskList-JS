@@ -25,6 +25,12 @@
       <button id="limpiar-completadas" class="boton-secundario" type="button">Borrar Todo</button>
     </section>
 
+    <nav class="filtros" aria-label="Filtrar tareas">
+      <button class="filtro activo" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
+      <button class="filtro" type="button" data-filtro="pendientes" aria-pressed="false">Pendientes</button>
+      <button class="filtro" type="button" data-filtro="completadas" aria-pressed="false">Completadas</button>
+    </nav>
+
     <ul id="lista-tareas" aria-label="Lista de tareas"></ul>
     <p id="lista-vacia" class="lista-vacia">Todavía no tienes tareas</p>
   </main>

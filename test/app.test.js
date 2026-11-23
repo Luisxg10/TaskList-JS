@@ -45,3 +45,13 @@ test("limpia las tareas completadas", () => {
   ];
   assert.deepEqual(TaskList.limpiarCompletadas(tareas).map(t => t.id), [1]);
 });
+
+test("filtra tareas pendientes y completadas", () => {
+  const tareas = [
+    { id: 1, texto: "Leer", completada: false },
+    { id: 2, texto: "Practicar", completada: true }
+  ];
+  assert.deepEqual(TaskList.filtrarTareas(tareas, "pendientes").map(t => t.id), [1]);
+  assert.deepEqual(TaskList.filtrarTareas(tareas, "completadas").map(t => t.id), [2]);
+  assert.deepEqual(TaskList.filtrarTareas(tareas, "todas"), tareas);
+});

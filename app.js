@@ -32,7 +32,13 @@
     return tareas.filter(tarea => !tarea.completada);
   }
 
-  return { agregarTarea, alternarTarea, eliminarTarea, contarPendientes, limpiarCompletadas };
+  function filtrarTareas(tareas, filtro) {
+    if (filtro === "pendientes") return tareas.filter(tarea => !tarea.completada);
+    if (filtro === "completadas") return tareas.filter(tarea => tarea.completada);
+    return tareas;
+  }
+
+  return { agregarTarea, alternarTarea, eliminarTarea, contarPendientes, limpiarCompletadas, filtrarTareas };
 });
 
 if (typeof document !== "undefined") {
@@ -46,10 +52,20 @@ if (typeof document !== "undefined") {
     const mensaje = document.querySelector("#mensaje");
     const listaVacia = document.querySelector("#lista-vacia");
     const limpiar = document.querySelector("#limpiar-completadas");
+    const botonesFiltro = document.querySelectorAll("[data-filtro]");
     let tareas = cargarTareas();
+    let filtroActual = "todas";
 
     function cargarTareas() {
-      try { return JSON.parse(localStorage.getItem("tasklist-tareas")) || []; }
+      try {
+        const guardadas = JSON.parse(localStorage.getItem("tasklist-tareas"));
+        if (!Array.isArray(guardadas)) return [];
+        return guardadas.filter(tarea =>
+          tarea && typeof tarea.id === "number" &&
+          typeof tarea.texto === "string" &&
+          typeof tarea.completada === "boolean"
+        );
+      }
       catch { return []; }
     }
 
@@ -59,7 +75,7 @@ if (typeof document !== "undefined") {
 
     function renderizar() {
       lista.replaceChildren();
-      tareas.forEach(tarea => {
+      TaskList.filtrarTareas(tareas, filtroActual).forEach(tarea => {
         const item = document.createElement("li");
         item.className = `tarea${tarea.completada ? " completada" : ""}`;
 
@@ -91,8 +107,21 @@ if (typeof document !== "undefined") {
       });
       const pendientes = TaskList.contarPendientes(tareas);
       contador.textContent = `${pendientes} ${pendientes === 1 ? "tarea pendiente" : "tareas pendientes"}`;
-      listaVacia.hidden = tareas.length > 0;
+      listaVacia.hidden = TaskList.filtrarTareas(tareas, filtroActual).length > 0;
+      listaVacia.textContent = tareas.length === 0
+        ? "Todavía no tienes tareas"
+        : "No hay tareas en esta categoría";
     }
+
+    botonesFiltro.forEach(boton => boton.addEventListener("click", () => {
+      filtroActual = boton.dataset.filtro;
+      botonesFiltro.forEach(opcion => {
+        const seleccionado = opcion === boton;
+        opcion.classList.toggle("activo", seleccionado);
+        opcion.setAttribute("aria-pressed", String(seleccionado));
+      });
+      renderizar();
+    }));
 
     formulario.addEventListener("submit", event => {
       event.preventDefault();

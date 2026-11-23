@@ -24,6 +24,9 @@ form button:hover { background: #444dc2; }
 #mensaje { min-height: 20px; margin: 8px 0; color: #b42318; font-size: .9rem; }
 .resumen { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 15px 0; color: #687086; font-size: .9rem; }
 .boton-secundario { background: #f0f1ff; color: #4b52b8; padding: 9px 12px; }
+.filtros { display: flex; gap: 8px; margin: 18px 0 8px; }
+.filtro { background: transparent; color: #687086; padding: 8px 12px; }
+.filtro.activo { background: #eef0ff; color: #4b52b8; }
 #lista-tareas { list-style: none; padding: 0; margin: 0; }
 .tarea {
   display: flex; align-items: center; gap: 12px; padding: 13px 0;
