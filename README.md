@@ -35,8 +35,6 @@ Instala Node.js 22 o una versión compatible. Desde la carpeta del proyecto ejec
 npm test
 ```
 
-## Integración continua
-El archivo `.github/workflows/ci.yml` ejecuta las pruebas al subir cambios a `main` o al crear una solicitud de integración (pull request).
 
 ## Estructura
 ```text
@@ -51,11 +49,3 @@ TaskList_JS_Semana1/
 └── README.md
 ```
 
-## Evidencias de la semana 1
-Agregar al PDF capturas propias de:
-- Aplicación ejecutándose.
-- Repositorio de GitHub.
-- Historial con al menos cinco commits.
-- Archivo de GitHub Actions.
-- Ejecución exitosa de las pruebas.
-- Ejecución fallida por el error controlado y ejecución exitosa después de corregirlo.
