@@ -10,6 +10,8 @@
   function agregarTarea(tareas, texto) {
     const nombre = String(texto ?? "").trim();
     if (!nombre) return { tareas, error: "Escribe una tarea antes de agregarla." };
+    const duplicada = tareas.some(tarea => tarea.texto.trim().toLocaleLowerCase() === nombre.toLocaleLowerCase());
+    if (duplicada) return { tareas, error: "Esa tarea ya está en la lista." };
     const nueva = { id: Date.now() + Math.random(), texto: nombre, completada: false };
     return { tareas: [...tareas, nueva], error: "" };
   }

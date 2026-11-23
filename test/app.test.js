@@ -16,6 +16,13 @@ test("no agrega una tarea vacía", () => {
   assert.notEqual(resultado.error, "");
 });
 
+test("evita agregar tareas duplicadas aunque cambien mayúsculas o espacios", () => {
+  const tareas = [{ id: 1, texto: "Estudiar JavaScript", completada: false }];
+  const resultado = TaskList.agregarTarea(tareas, "  estudiar javascript  ");
+  assert.equal(resultado.tareas.length, 1);
+  assert.match(resultado.error, /ya está en la lista/);
+});
+
 test("marca una tarea como completada", () => {
   const tareas = [{ id: 1, texto: "Leer", completada: false }];
   const resultado = TaskList.alternarTarea(tareas, 1);
