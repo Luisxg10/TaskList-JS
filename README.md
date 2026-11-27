@@ -13,6 +13,7 @@ Practicar JavaScript, control de versiones con Git y validación automática con
 - Borrar todas las tareas completadas.
 - Guardar las tareas en el navegador con `localStorage`.
 - Ejecutar pruebas automáticas con Node.js.
+- Filtrar tareas por estado y evitar duplicados.
 
 ## Herramientas
 - HTML5 y CSS3.
@@ -34,6 +35,17 @@ Instala Node.js 22 o una versión compatible. Desde la carpeta del proyecto ejec
 ```bash
 npm test
 ```
+
+## Liberación y despliegue continuo (semana 2)
+
+- **Versión inicial:** 1.0.0.
+- **Plataforma:** GitHub Pages, adecuada para esta aplicación estática porque utiliza HTML, CSS y JavaScript del lado del navegador y permite publicar sin servidor ni dependencias de ejecución.
+- **URL pública:** https://luisxg10.github.io/TaskList-JS/ (se activa al habilitar GitHub Actions como origen de Pages en la configuración del repositorio).
+- **Proceso:** cada cambio enviado a `main` ejecuta primero `npm test`. Solo si las pruebas pasan, GitHub Actions empaqueta `index.html`, `styles.css` y `app.js` y despliega el sitio. Las solicitudes de cambios ejecutan CI, pero no publican.
+- **Configuración:** `.github/workflows/ci.yml`; no requiere secretos ni variables de configuración para esta aplicación.
+- **Ejecución manual:** desde **Actions → Validación de TaskList JS → Run workflow**.
+
+Después de habilitar Pages, guardar capturas de la ejecución exitosa en Actions, de la URL pública y de las verificaciones funcionales posteriores al despliegue para integrarlas al PDF de la entrega.
 
 
 ## Estructura

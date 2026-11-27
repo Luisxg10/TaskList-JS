@@ -5,6 +5,14 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   pruebas:
@@ -19,3 +27,32 @@ jobs:
           node-version: 22
       - name: Ejecutar pruebas
         run: npm test
+
+  publicar:
+    name: Desplegar en GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: pruebas
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Preparar archivos de la aplicación
+        run: |
+          mkdir dist
+          cp index.html styles.css app.js dist/
+      - name: Subir artefacto del sitio
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+      - name: Publicar sitio
+        id: despliegue
+        uses: actions/deploy-pages@v4
